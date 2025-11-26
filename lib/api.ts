@@ -11,8 +11,12 @@ export const getCars = async (page = 1, limit = 12, filters = {}) => {
 
 export const getCarById = async (id: string) => {
     const { data } = await axios.get<Car>(`/catalog/${id}`);
+    console.log(id);
+    
 
     return data;
+   
 };
+
 
 
