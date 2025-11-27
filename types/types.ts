@@ -24,8 +24,15 @@ export interface GetCarsResponse {
 }
 
 export interface FormFields {
-    name: string;
-    email: string;
-    date: string;
-    comment: string;
+  name: string;
+  email: string;
+  date: string;
+  comment: string;
+}
+
+export interface CarFilters {
+  brand?: string;
+  rentalPrice?: number;
+  mileageFrom?: number;
+  mileageTo?: number;
 }

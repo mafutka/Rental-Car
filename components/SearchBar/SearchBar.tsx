@@ -76,7 +76,7 @@ export default function SearchBar() {
         </div>
       </div>
 
-      <button className={css.searchBtn} onClick={handleSearch}> Search </button>
+      <Button className={css.button} onClick={handleSearch} type="submit"> Search </Button>
     </div>
   );
 }

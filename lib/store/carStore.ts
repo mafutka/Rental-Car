@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { Car } from "@/types/types";
+import { CarFilters } from "@/types/types";
 
 interface Filters {
   brand?: string;
@@ -13,9 +14,8 @@ interface CarsState {
   page: number;
   hasMore: boolean;
   totalPages: number;
-
   filters: Filters;
-  
+  resetPage: () => void;
   setFilters: (filters: Filters) => void;
   setTotalPages: (value: number) => void;
   setCars: (items: Car[]) => void;
@@ -32,11 +32,12 @@ export const useCarsStore = create<CarsState>((set) => ({
 
   filters: {},
 
-  setFilters: (filters) => set({ filters, page: 1 }),
+  setFilters: (filters: CarFilters) => set({ filters, page: 1 }),
 
   setCars: (items) => set({ cars: items }),
   addCars: (items) => set((state) => ({ cars: [...state.cars, ...items] })),
   increasePage: () => set((state) => ({ page: state.page + 1 })),
   setHasMore: (value) => set({ hasMore: value }),
   setTotalPages: (value) => set({ totalPages: value }),
+  resetPage: () => set({ page: 1 }),
 }));

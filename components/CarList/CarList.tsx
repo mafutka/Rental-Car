@@ -7,11 +7,9 @@ import CarItem from "../CarItem/CarItem";
 import css from "./CarList.module.css";
 
 export default function CarList() {
-
   const cars = useCarsStore((s) => s.cars);
   const page = useCarsStore((s) => s.page);
   const hasMore = useCarsStore((s) => s.hasMore);
-  const totalPages = useCarsStore((s) => s.totalPages);
   const filters = useCarsStore((s) => s.filters);
 
   const setCars = useCarsStore((s) => s.setCars);
@@ -22,43 +20,40 @@ export default function CarList() {
 
   const [loading, setLoading] = useState(false);
 
+  // --- LOAD FIRST PAGE ---
   useEffect(() => {
     const load = async () => {
       setLoading(true);
-      try {
-        const { cars: items, totalPages } = await getCars(1, 12, filters);
 
-        setCars(items);
-        setTotalPages(totalPages);
-        setHasMore(1 < totalPages);
-      } catch (error) {
-        console.error("Failed to load cars:", error);
-      } finally {
-        setLoading(false);
-      }
+      const { cars: items, totalPages } = await getCars(1, 12, filters);
+
+      setCars(items);
+      setTotalPages(totalPages);
+      setHasMore(totalPages > 1);
+
+      setLoading(false);
     };
-    load();
-  }, [filters]);
 
+    load();
+  }, [filters, setCars, setTotalPages, setHasMore]);
+
+  // --- LOAD MORE ---
   useEffect(() => {
     if (page === 1) return;
 
     const loadMore = async () => {
       setLoading(true);
-      try {
-        const { cars: items } = await getCars(page, 12, filters);
 
-        addCars(items);
-        setHasMore(page < totalPages);
-      } catch (error) {
-        console.error("Failed to load more cars:", error);
-      } finally {
-        setLoading(false);
-      }
+      const { cars: items, totalPages } = await getCars(page, 12, filters);
+
+      addCars(items);
+      setHasMore(page < totalPages);
+
+      setLoading(false);
     };
 
     loadMore();
-  }, [page]);
+  }, [page, filters, addCars, setHasMore]);
 
   return (
     <div className={css.wrapper}>
@@ -68,18 +63,14 @@ export default function CarList() {
         ))}
       </ul>
 
+      {!loading && cars.length === 0 && (
+        <p className={css.noResults}>No cars match your search</p>
+      )}
+
       {loading && <p>Loading...</p>}
 
-      {cars.length === 0 && !loading && (
-        <p className={css.noResults}>No cars match your search</p>
-)}
-
       {hasMore && !loading && (
-        <button
-          className={css.button}
-          onClick={increasePage}
-          disabled={loading}
-        >
+        <button className={css.button} onClick={increasePage}>
           Load more
         </button>
       )}

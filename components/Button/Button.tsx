@@ -8,13 +8,22 @@ export interface ButtonProps {
     children: React.ReactNode;
     onClick?: () => void;
     type?: "button" | "submit";
-    href: string;
+    href?: string;
+    className?: string;
 }
 
-export function Button({ children, href }: ButtonProps) {
+export function Button({ children, href, onClick, type = "button", className }: ButtonProps) {
+    const classes = `${css.button} ${className || ""}`;
+    if (href) {
     return (
         <Link href={href} className={css.button}>
             {children}
         </Link>
     );
+    };
+    return (
+    <button onClick={onClick} type={type} className={css.classes}>
+      {children}
+    </button>
+  );
 }

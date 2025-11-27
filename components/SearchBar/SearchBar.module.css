@@ -27,3 +27,7 @@
     background: var(--inputs);
     border: none;
 }
+
+.button {
+    width: 156px;
+}
