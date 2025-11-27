@@ -1,12 +1,22 @@
 import { create } from "zustand";
 import { Car } from "@/types/types";
 
+interface Filters {
+  brand?: string;
+  price?: number;
+  mileageFrom?: number;
+  mileageTo?: number;
+}
+
 interface CarsState {
   cars: Car[];
   page: number;
   hasMore: boolean;
   totalPages: number;
 
+  filters: Filters;
+  
+  setFilters: (filters: Filters) => void;
   setTotalPages: (value: number) => void;
   setCars: (items: Car[]) => void;
   addCars: (items: Car[]) => void;
@@ -19,6 +29,10 @@ export const useCarsStore = create<CarsState>((set) => ({
   page: 1,
   hasMore: true,
   totalPages: 1,
+
+  filters: {},
+
+  setFilters: (filters) => set({ filters, page: 1 }),
 
   setCars: (items) => set({ cars: items }),
   addCars: (items) => set((state) => ({ cars: [...state.cars, ...items] })),

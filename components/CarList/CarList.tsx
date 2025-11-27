@@ -12,6 +12,7 @@ export default function CarList() {
   const page = useCarsStore((s) => s.page);
   const hasMore = useCarsStore((s) => s.hasMore);
   const totalPages = useCarsStore((s) => s.totalPages);
+  const filters = useCarsStore((s) => s.filters);
 
   const setCars = useCarsStore((s) => s.setCars);
   const addCars = useCarsStore((s) => s.addCars);
@@ -25,9 +26,10 @@ export default function CarList() {
     const load = async () => {
       setLoading(true);
       try {
-        const { cars: items, totalPages } = await getCars(1, 12);
+        const { cars: items, totalPages } = await getCars(1, 12, filters);
+
         setCars(items);
-        setTotalPages(totalPages); 
+        setTotalPages(totalPages);
         setHasMore(1 < totalPages);
       } catch (error) {
         console.error("Failed to load cars:", error);
@@ -36,15 +38,16 @@ export default function CarList() {
       }
     };
     load();
-  }, [setCars, setHasMore, setTotalPages]);
+  }, [filters]);
 
   useEffect(() => {
-    if (page === 1) return; 
+    if (page === 1) return;
 
     const loadMore = async () => {
       setLoading(true);
       try {
-        const { cars: items } = await getCars(page, 12);
+        const { cars: items } = await getCars(page, 12, filters);
+
         addCars(items);
         setHasMore(page < totalPages);
       } catch (error) {
@@ -55,7 +58,7 @@ export default function CarList() {
     };
 
     loadMore();
-  }, [page, addCars, setHasMore, totalPages]);
+  }, [page]);
 
   return (
     <div className={css.wrapper}>
@@ -70,7 +73,7 @@ export default function CarList() {
       {hasMore && !loading && (
         <button
           className={css.button}
-          onClick={() => increasePage()}
+          onClick={increasePage}
           disabled={loading}
         >
           Load more
