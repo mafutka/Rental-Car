@@ -22,3 +22,10 @@ export interface GetCarsResponse {
   total: number;
   totalPages: number;
 }
+
+export interface FormFields {
+    name: string;
+    email: string;
+    date: string;
+    comment: string;
+}

@@ -70,6 +70,10 @@ export default function CarList() {
 
       {loading && <p>Loading...</p>}
 
+      {cars.length === 0 && !loading && (
+        <p className={css.noResults}>No cars match your search</p>
+)}
+
       {hasMore && !loading && (
         <button
           className={css.button}

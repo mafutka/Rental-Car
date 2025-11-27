@@ -9,14 +9,14 @@ export default function SearchBar() {
   const setFilters = useCarsStore((s) => s.setFilters);
 
   const [brand, setBrand] = useState("");
-  const [price, setPrice] = useState("");
+  const [rentalPrice, setRentalPrice] = useState("");
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
 
   const handleSearch = () => {
     setFilters({
       brand: brand || undefined,
-      price: price ? Number(price) : undefined,
+      rentalPrice: rentalPrice ? Number(rentalPrice) : undefined,
       mileageFrom: from ? Number(from) : undefined,
       mileageTo: to ? Number(to) : undefined,
     });
@@ -25,21 +25,29 @@ export default function SearchBar() {
   return (
     <div className={css.wrapper}>
       <div className={css.field}>
-        <label>Car brand</label>
-        <select value={brand} onChange={(e) => setBrand(e.target.value)}>
+        <label className={css.label}>Car brand</label>
+        <select
+          className={css.select} 
+          value={brand} 
+          onChange={(e) => setBrand(e.target.value)}>
           <option value="">Choose a brand</option>
           <option>Audi</option>
           <option>BMW</option>
           <option>Buick</option>
           <option>Chevrolet</option>
           <option>Toyota</option>
-          {/* можу зробити автоматичне завантаження брендів */}
+          <option>Volvo</option>
+          <option>Hummer</option>
         </select>
       </div>
 
       <div className={css.field}>
-        <label>Price / 1 hour</label>
-        <select value={price} onChange={(e) => setPrice(e.target.value)}>
+        <label className={css.label}>Price / 1 hour</label>
+        <select
+          className={css.select}
+          value={rentalPrice}
+          onChange={(e) => setRentalPrice(e.target.value)}
+        >
           <option value="">Choose a price</option>
           <option>30</option>
           <option>40</option>
@@ -51,7 +59,7 @@ export default function SearchBar() {
       </div>
 
       <div className={css.field}>
-        <label>Car mileage / km</label>
+        <label className={css.label}>Car mileage / km</label>
         <div className={css.range}>
           <input
             type="number"
@@ -68,7 +76,7 @@ export default function SearchBar() {
         </div>
       </div>
 
-     <button className={css.searchBtn} onClick={handleSearch}> Search </button>
+      <button className={css.searchBtn} onClick={handleSearch}> Search </button>
     </div>
   );
 }

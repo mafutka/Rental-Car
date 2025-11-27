@@ -3,7 +3,7 @@ import { Car } from "@/types/types";
 
 interface Filters {
   brand?: string;
-  price?: number;
+  rentalPrice?: number;
   mileageFrom?: number;
   mileageTo?: number;
 }
