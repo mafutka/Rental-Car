@@ -1,8 +1,8 @@
-import axios from "axios";
+import { api } from "@/app/api/api";
 import { Car, GetCarsResponse } from "@/types/types";
 
 export const getCars = async (page = 1, limit = 12, filters = {}) => {
-  const { data } = await axios.get<GetCarsResponse>("/cars", {
+  const { data } = await api.get<GetCarsResponse>("/cars", {
     params: { page, limit, ...filters },
   });
 
@@ -10,13 +10,14 @@ export const getCars = async (page = 1, limit = 12, filters = {}) => {
 };
 
 export const getCarById = async (id: string) => {
-    const { data } = await axios.get<Car>(`/catalog/${id}`);
+    const { data } = await api.get<Car>(`/cars/${id}`);
     console.log(id);
-    
 
     return data;
    
 };
+
+
 
 
 

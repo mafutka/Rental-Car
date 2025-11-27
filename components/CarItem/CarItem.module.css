@@ -1,0 +1,123 @@
+.image {
+    object-fit: cover;
+    border-radius: 10px;
+    width: 100%;
+}
+
+.listItem {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 6px;
+    background-color: var(--gray-light);
+    border-radius: 20px;
+    width: 100%;
+}
+
+.cardTitle {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 133%;
+    margin-bottom: 8px;
+    position: relative;
+}
+
+.cardLocation {
+    display: flex;
+    flex-direction: column;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    margin-bottom: 24px;
+}
+
+.starLogo {
+    width: 16px;
+    height: 16px;
+    fill: #ffc531;
+}
+
+.mapLogo {
+    width: 16px;
+    height: 16px;
+    margin-right: 4px;
+}
+
+.rating {
+    margin-right: 16px;
+}
+
+.description {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 255px;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 150%;
+    color: var(--text);
+    margin-bottom: 10px;
+}
+
+@media screen and (min-width: 768px) {
+    .listItem {
+        gap: 12px;
+        padding: 12px;
+    }
+
+    .cardTitle {
+        font-size: 18px;
+    }
+
+    .cardPrice {
+        margin-left: auto;
+        margin-right: 12px;
+    }
+
+    .description {
+        width: 420px;
+        font-size: 16px;
+        margin-bottom: 14px;
+    }
+}
+
+@media screen and (min-width: 1440px) {
+    .image {
+        width: 292px;
+        height: 320px;
+    }
+    .listItem {
+        flex-direction: row;
+        background-color: transparent;
+        gap: 24px;
+        padding: 24px;
+        border: 1px solid var(--gray-light);
+    }
+
+    .cardTitle {
+        flex-direction: row;
+        font-size: 24px;
+        align-items: center;
+    }
+
+    .cardPrice {
+        margin-left: auto;
+        margin-right: 12px;
+    }
+
+    .cardLocation {
+        flex-direction: row;
+        align-items: center;
+        margin-bottom: 24px;
+    }
+
+    .description {
+        width: 524px;
+        font-size: 16px;
+        margin-bottom: 24px;
+    }
+}
