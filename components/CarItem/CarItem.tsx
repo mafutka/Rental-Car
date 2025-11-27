@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Car } from "@/types/types";
 import css from "./CarItem.module.css";
 // import { useFavoriteStore } from "@/lib/store/favoriteStore";
@@ -19,7 +18,7 @@ export default function CarItem({ car }: CarItemProps) {
 return (
     <li className={css.card}>
         <div className={css.imgwrapper}>
-            <Image src={car.img} alt={car.model} className={css.image}></Image>
+            <img src={car.img} alt={car.model} className={css.image} />
        
             {/* <button
                 className={css.like}

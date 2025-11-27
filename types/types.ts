@@ -20,4 +20,5 @@ export interface Car {
 export interface GetCarsResponse {
   cars: Car[];
   total: number;
+  totalPages: number;
 }
