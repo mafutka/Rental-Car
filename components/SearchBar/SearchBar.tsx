@@ -1,17 +1,30 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useCarsStore } from "@/lib/store/carStore";
+import { getCars } from "@/lib/api/api"; 
 import css from "./SearchBar.module.css";
 import { Button } from "../Button/Button";
 
 export default function SearchBar() {
   const setFilters = useCarsStore((s) => s.setFilters);
 
+  const [brands, setBrands] = useState<string[]>([]); 
+
   const [brand, setBrand] = useState("");
   const [rentalPrice, setRentalPrice] = useState("");
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
+
+  useEffect(() => {
+    const loadBrands = async () => {
+      const { cars } = await getCars(1, 999); 
+      const unique = Array.from(new Set(cars.map((c) => c.brand)));
+      setBrands(unique);
+    };
+
+    loadBrands();
+  }, []);
 
   const handleSearch = () => {
     setFilters({
@@ -27,17 +40,15 @@ export default function SearchBar() {
       <div className={css.field}>
         <label className={css.label}>Car brand</label>
         <select
-          className={css.select} 
-          value={brand} 
-          onChange={(e) => setBrand(e.target.value)}>
+          className={css.select}
+          value={brand}
+          onChange={(e) => setBrand(e.target.value)}
+        >
           <option value="">Choose a brand</option>
-          <option>Audi</option>
-          <option>BMW</option>
-          <option>Buick</option>
-          <option>Chevrolet</option>
-          <option>Toyota</option>
-          <option>Volvo</option>
-          <option>Hummer</option>
+
+          {brands.map((b) => (
+            <option key={b}>{b}</option>
+          ))}
         </select>
       </div>
 
@@ -62,12 +73,14 @@ export default function SearchBar() {
         <label className={css.label}>Car mileage / km</label>
         <div className={css.range}>
           <input
+            className={css.from}
             type="number"
             placeholder="From"
             value={from}
             onChange={(e) => setFrom(e.target.value)}
           />
           <input
+            className={css.to}
             type="number"
             placeholder="To"
             value={to}
@@ -76,7 +89,12 @@ export default function SearchBar() {
         </div>
       </div>
 
-      <Button className={css.button} onClick={handleSearch} type="submit"> Search </Button>
+      <Button className={css.searchButton} onClick={(e) => {
+    e.currentTarget.blur(); 
+    handleSearch();
+  }} type="submit">
+        Search
+      </Button>
     </div>
   );
 }

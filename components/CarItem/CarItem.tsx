@@ -13,7 +13,9 @@ export default function CarItem({ car }: CarItemProps) {
     // const favorites = useFavoriteStore((s) => s.favorites);
     // const isFav = favorites.includes(car.id);
 
-    const [city, country] = car.address.split(", ");
+    const addressParts = car.address.split(", ").map(p => p.trim());
+    const city = addressParts[addressParts.length - 2];
+    const country = addressParts[addressParts.length - 1];
   
 return (
     <li className={css.card}>
@@ -47,6 +49,7 @@ return (
             <span className={css.dot}> | </span>
             <span>{car.rentalCompany}</span>
             <span className={css.dot}> | </span>
+            <span className={css.break}></span>
             <span>{car.type}</span>
             <span className={css.dot}> | </span>
             <span>{car.mileage.toLocaleString()} km</span>

@@ -10,11 +10,11 @@ export default function Homepage() {
       <div className={css.heroinfo}>
         <h1 className={css.title}>Find your perfect rental car</h1>
         <p className={css.description}>Reliable and budget-friendly rentals for any journey</p>
-        <div className={css.button}>
-          <Button href="/catalog">
+        
+          <Button href="/catalog" className={css.button}>
             View Catalog
           </Button>
-        </div>
+        
       </div>
     </section>
   )

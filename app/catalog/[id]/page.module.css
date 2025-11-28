@@ -1,7 +1,7 @@
 .wrapper {
-  display: grid;
-  gap: 40px;
-  padding: 40px 0;
+  display: flex;
+  gap: 72px;
+  padding: 84px 120px 104px 120px;
 }
 
 .left {

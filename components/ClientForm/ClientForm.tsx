@@ -39,17 +39,20 @@ export default function ClientForm() {
   };
 
   return (
-    <div className={css.formBlock}>
-      <h2 className={css.formTitle}>Book your car now</h2>
-      <p className={css.text}>Stay connected! We are always ready to help you.</p>
-
+    <div className={css.formWrapper}>
+      
+        <h2 className={css.formTitle}>Book your car now</h2>
+        <p className={css.text}>Stay connected! We are always ready to help you.</p>
+      
       {message && <p className={css.success}>{message}</p>}
 
       <form className={css.form} onSubmit={handleSubmit}>
+        <div className={css.inputsWrapper}>
         <input
           type="text"
           name="name"
           placeholder="Name*"
+          className={css.input}
           value={draft.name}
           onChange={handleChange}
         />
@@ -58,6 +61,7 @@ export default function ClientForm() {
           type="email"
           name="email"
           placeholder="Email*"
+          className={css.input}
           value={draft.email}
           onChange={handleChange}
         />
@@ -65,6 +69,8 @@ export default function ClientForm() {
         <input
           type="date"
           name="date"
+          placeholder="Booking date"
+          className={css.input}
           value={draft.date}
           onChange={handleChange}
         />
@@ -76,8 +82,9 @@ export default function ClientForm() {
           value={draft.comment}
           onChange={handleChange}
         />
-
-        <Button type="submit">Send</Button>
+        </div>
+        
+        <Button className={css.button} type="submit">Send</Button>
       </form>
     </div>
   );
