@@ -33,6 +33,7 @@ export interface FormFields {
 export interface CarFilters {
   brand?: string;
   rentalPrice?: number;
+  mileage?: number;
   mileageFrom?: number;
   mileageTo?: number;
 }

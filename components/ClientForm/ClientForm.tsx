@@ -25,6 +25,9 @@ export default function ClientForm() {
     }
 
     setMessage("Your booking request has been accepted!");
+    if (document.activeElement instanceof HTMLElement) {
+  document.activeElement.blur();
+}
     clearDraft();
 
     setTimeout(() => {

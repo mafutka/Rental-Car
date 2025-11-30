@@ -22,6 +22,7 @@ interface CarsState {
   addCars: (items: Car[]) => void;
   increasePage: () => void;
   setHasMore: (value: boolean) => void;
+  resetFilters: () => void;
 }
 
 export const useCarsStore = create<CarsState>((set) => ({
@@ -33,7 +34,7 @@ export const useCarsStore = create<CarsState>((set) => ({
   filters: {},
 
   setFilters: (filters: CarFilters) => set({ filters, page: 1 }),
-
+  resetFilters: () => set({ filters: {}, page: 1 }),
   setCars: (items) => set({ cars: items }),
   addCars: (items) => set((state) => ({ cars: [...state.cars, ...items] })),
   increasePage: () => set((state) => ({ page: state.page + 1 })),

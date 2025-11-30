@@ -5,6 +5,7 @@ import { getCars } from "@/lib/api/api";
 import { useCarsStore } from "@/lib/store/carStore";
 import CarItem from "../CarItem/CarItem";
 import css from "./CarList.module.css";
+import { Car } from "@/types/types";
 
 export default function CarList() {
   const cars = useCarsStore((s) => s.cars);
@@ -20,14 +21,22 @@ export default function CarList() {
 
   const [loading, setLoading] = useState(false);
 
-  // --- LOAD FIRST PAGE ---
+  // --- Load first page ---
   useEffect(() => {
     const load = async () => {
       setLoading(true);
 
       const { cars: items, totalPages } = await getCars(1, 12, filters);
 
-      setCars(items);
+      // 🔥 локальна фільтрація по пробігу (без reassignment)
+      const mileageFrom = filters?.mileageFrom;
+      const mileageTo = filters?.mileageTo;
+
+      const filtered: Car[] = items
+        .filter((c) => (typeof mileageFrom === "number" ? c.mileage >= mileageFrom : true))
+        .filter((c) => (typeof mileageTo === "number" ? c.mileage <= mileageTo : true));
+
+      setCars(filtered);
       setTotalPages(totalPages);
       setHasMore(totalPages > 1);
 
@@ -35,9 +44,9 @@ export default function CarList() {
     };
 
     load();
-  }, [filters, setCars, setTotalPages, setHasMore]);
+  }, [filters, setCars, setHasMore, setTotalPages]);
 
-  // --- LOAD MORE ---
+  // --- Load more pages ---
   useEffect(() => {
     if (page === 1) return;
 
@@ -46,7 +55,14 @@ export default function CarList() {
 
       const { cars: items, totalPages } = await getCars(page, 12, filters);
 
-      addCars(items);
+      const mileageFrom = filters?.mileageFrom;
+      const mileageTo = filters?.mileageTo;
+
+      const filtered: Car[] = items
+        .filter((c) => (typeof mileageFrom === "number" ? c.mileage >= mileageFrom : true))
+        .filter((c) => (typeof mileageTo === "number" ? c.mileage <= mileageTo : true));
+
+      addCars(filtered);
       setHasMore(page < totalPages);
 
       setLoading(false);
@@ -64,7 +80,7 @@ export default function CarList() {
       </ul>
 
       {!loading && cars.length === 0 && (
-        <p className={css.noResults}>No cars match your search</p>
+        <p className={css.noResults}>No cars match your search request</p>
       )}
 
       {loading && <p>Loading...</p>}
