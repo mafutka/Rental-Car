@@ -21,14 +21,12 @@ export default function CarList() {
 
   const [loading, setLoading] = useState(false);
 
-  // --- Load first page ---
   useEffect(() => {
     const load = async () => {
       setLoading(true);
 
       const { cars: items, totalPages } = await getCars(1, 12, filters);
 
-      // 🔥 локальна фільтрація по пробігу (без reassignment)
       const mileageFrom = filters?.mileageFrom;
       const mileageTo = filters?.mileageTo;
 
@@ -46,7 +44,6 @@ export default function CarList() {
     load();
   }, [filters, setCars, setHasMore, setTotalPages]);
 
-  // --- Load more pages ---
   useEffect(() => {
     if (page === 1) return;
 
@@ -86,7 +83,7 @@ export default function CarList() {
       {loading && <p>Loading...</p>}
 
       {hasMore && !loading && (
-        <button className={css.button} onClick={increasePage}>
+        <button className={css.loadMoreButton} onClick={increasePage}>
           Load more
         </button>
       )}

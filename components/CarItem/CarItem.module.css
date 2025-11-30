@@ -6,6 +6,7 @@
 }
 
 .imgwrapper {
+    position: relative;
     margin-bottom: 16px;
 }
 
@@ -29,6 +30,7 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 8px;
+    flex-shrink: 0;
 }
 
 .title {
@@ -47,11 +49,12 @@
     display: flex;
     flex-wrap: wrap;
     font-family: var(--font-family);
-    font-weight: 400;
+    font-weight: 380;
     font-size: 12px;
     line-height: 133%;
     color: var(--gray);
     margin-bottom: 30px;
+    flex-shrink: 0;
 }
 
 .dot {
@@ -63,4 +66,24 @@
     width: 100%;
     height: 0;
     margin: 0;
+}
+
+.heartButton {
+   background-color: transparent;
+  border: none;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  cursor: pointer;
+  z-index: 2;
+  padding: 4px;
+}
+
+.heartIcon {
+    width: 16px;
+  height: 16px;
+  stroke: var(--badges);
+  stroke-width: 2;
+  transition: fill 0.2s ease;
+
 }

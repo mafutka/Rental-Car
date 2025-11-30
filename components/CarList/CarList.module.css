@@ -15,7 +15,7 @@
     margin-bottom: 80px;
 }
 
-.button {
+.loadMoreButton {
     margin-bottom: 124px;
     background-color: var(--white);
     border: 1px solid var(--button);

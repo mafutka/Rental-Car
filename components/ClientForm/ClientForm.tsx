@@ -20,7 +20,7 @@ export default function ClientForm() {
 
     if (error) {
       setMessage(error.message);
-      setTimeout(() => setMessage(""), 5000);
+      setTimeout(() => setMessage(""), 7000);
       return;
     }
 
