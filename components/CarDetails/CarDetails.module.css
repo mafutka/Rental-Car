@@ -1,0 +1,67 @@
+.wrapper {
+    width: 488px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.title {
+    margin-bottom: 8px;
+}
+
+.span {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 125%;
+    color: var(--gray);
+}
+
+.addressWrapper {
+    display: flex;
+    align-items: center;
+}
+
+.address,
+.option,
+.description {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 16px;
+    
+  }
+
+.price{
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 133%;
+    color: var(--blue);
+    margin:  16px 0 32px 0;
+    
+    
+}
+
+
+.cardatails{
+    display: flex;
+    flex-direction: column;
+    margin-top: 68px;
+
+
+}
+
+.item{
+    display: flex;
+    gap: 2px;
+    align-items: center;
+}
+
+.itemtitle{
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 120%;
+}
+
+.icon {
+    stroke: var(--main); 
+    fill: var(--main);  
+}
