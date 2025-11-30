@@ -70,10 +70,17 @@ export default function ClientForm() {
         />
 
         <input
-          type="date"
+          type="text"
           name="date"
+          onFocus={(e) => (e.target.type = 'date')}
+          onBlur={(e) => {
+            e.target.type = 'text'; 
+          if (e.target.value === '') {
+            e.target.type = 'text';
+    }
+  }}
           placeholder="Booking date"
-          className={css.input}
+          className={`${css.input} ${css.dateInput}`}
           value={draft.date}
           onChange={handleChange}
         />
