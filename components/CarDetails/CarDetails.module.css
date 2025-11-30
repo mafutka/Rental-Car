@@ -36,22 +36,18 @@
     line-height: 133%;
     color: var(--blue);
     margin:  16px 0 32px 0;
-    
-    
+   
 }
-
 
 .cardatails{
     display: flex;
     flex-direction: column;
     margin-top: 68px;
-
-
+    gap: 15px;
 }
 
 .item{
     display: flex;
-    gap: 2px;
     align-items: center;
 }
 
@@ -59,9 +55,11 @@
     font-weight: 600;
     font-size: 20px;
     line-height: 120%;
+    margin-bottom: 12px;
 }
 
 .icon {
     stroke: var(--main); 
-    fill: var(--main);  
+    fill: var(--main);
+    margin-right: 8px;  
 }

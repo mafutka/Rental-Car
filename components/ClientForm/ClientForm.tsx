@@ -76,7 +76,7 @@ export default function ClientForm() {
           onBlur={(e) => {
             e.target.type = 'text'; 
           if (e.target.value === '') {
-            e.target.type = 'text';
+          e.target.type = 'text';
     }
   }}
           placeholder="Booking date"
