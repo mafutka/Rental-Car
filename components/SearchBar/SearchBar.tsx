@@ -6,6 +6,7 @@ import { getCars } from "@/lib/api/api";
 import css from "./SearchBar.module.css";
 import { Button } from "../Button/Button";
 
+
 export default function SearchBar() {
   const setFilters = useCarsStore((s) => s.setFilters);
 
@@ -89,10 +90,7 @@ export default function SearchBar() {
         </div>
       </div>
 
-      <Button className={css.searchButton} onClick={(e) => {
-    e.currentTarget.blur(); 
-    handleSearch();
-  }} type="submit">
+      <Button className={css.searchButton} onClick={handleSearch} type="submit">
         Search
       </Button>
     </div>
