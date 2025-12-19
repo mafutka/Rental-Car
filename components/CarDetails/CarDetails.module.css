@@ -9,6 +9,10 @@
     margin-bottom: 8px;
 }
 
+.addressWrapper {
+    gap: 16px;
+}
+
 .span {
     font-weight: 500;
     font-size: 16px;
