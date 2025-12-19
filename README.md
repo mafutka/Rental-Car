@@ -1,4 +1,4 @@
-This is a rental car service application 
+This is a rental car service application 🚗 🚙 🏎️ 🛻
  
 A fully functional car rental catalog built with Next.js, TypeScript, Zustand, featuring server-side filtering, pagination, global state management, and a complete car booking flow.
 The project is deployed and available online https://rental-car-rho-ten.vercel.app/.
